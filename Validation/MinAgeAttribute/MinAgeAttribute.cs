@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Attributes
+namespace Attributes.Validation
 {
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-	public class MinAgeAttribute : ValidationAttribute
+	public class MinAgeAttribute : ValidationAttribute, IClientValidatable
 	{
 		private readonly int _minAge;
 
@@ -14,18 +14,41 @@ namespace Attributes
 		}
 
 
-		protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+		public override bool IsValid(object value)
 		{
+			bool isValid = true;
+
 			if (value is DateTime)
 			{
-				DateTime birthDate = (DateTime) value;
+				DateTime birthDate = (DateTime)value;
 				DateTime maxDate = DateTime.Today.AddYears(-_minAge);
 
 				if (maxDate < birthDate)
-					return new ValidationResult(String.Format("You must be at least {0} years old", _minAge));
+				{
+					isValid = false;
+				}
 			}
 
-			return ValidationResult.Success;
+			return isValid;
+		}
+
+
+		public override string FormatErrorMessage(string name)
+		{
+			return string.Format(ErrorMessageString, name, _minAge);
+		}
+
+
+		public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+		{
+			var rule = new ModelClientValidationRule
+			{
+				ErrorMessage = FormatErrorMessage(metadata.GetDisplayName()),
+				ValidationType = "minage"
+			};
+
+			rule.ValidationParameters["value"] = _minAge;
+			yield return rule;
 		}
 	}
 }

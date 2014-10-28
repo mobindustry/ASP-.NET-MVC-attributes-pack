@@ -4,8 +4,9 @@ using System.Configuration;
 using System.Drawing;
 using System.Web;
 
-namespace Attributes
+namespace Attributes.Validation
 {
+	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 	public class ImageDimensionsAttribute : ValidationAttribute
 	{
 		private readonly int _height;
