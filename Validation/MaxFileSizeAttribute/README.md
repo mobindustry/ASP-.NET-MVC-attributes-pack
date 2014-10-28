@@ -1,6 +1,6 @@
 Description
 ---
-Simple MVC attribute for validating a file for the size limitation.
+Simple MVC attribute for validating a file for some size limitation.
 
 Use this attribute when the file is required to be not more than some value.
 
