@@ -1,11 +1,13 @@
 Description
----
+===
 Simple MVC attribute for validating a file for some size limitation.
 
 Use this attribute when the file is required to be not more than some value.
 
 
 Usage
+===
+Server Validation
 ---
 The maximum file size must be defined in bytes. There are two ways to set this value:
 
@@ -59,3 +61,12 @@ But you can set the FormatUnit, and it will be used for the formatting:
 public HttpPostedFileBase File { get; set; }
 ```
 Error message: "The file size is limited to 2048 Kb." (instead of 2 Mb)
+
+Client Validation
+---
+The MaxFileSizeAttribute implements the *IClientValidatable* interface so it supports the javascript validation.
+To use it reference a validate.attr.maxfilesize.js file in your view.
+
+**Please note**: it depends on [jQuery Unobtrusive Validation]
+
+[jQuery Unobtrusive Validation]: https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation/
