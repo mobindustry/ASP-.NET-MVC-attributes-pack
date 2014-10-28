@@ -1,6 +1,7 @@
 Description
 ==============
 Simple MVC attribute for validating an uploaded image for exact dimensions (width & height).
+
 Use this attribute when the image is required to be exactly W x H pixels.
 
 
@@ -30,7 +31,7 @@ Define your dimensions in the Web.config <appSettings> section
 		<add key="Image.Height" value="100" />
 	</appSettings>
 	...
-	</configuration>
+</configuration>
 ```
 
 and pass the <appSettings> keys to the attribute
