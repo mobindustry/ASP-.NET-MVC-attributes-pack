@@ -1,4 +1,4 @@
-mvc-attributes
+ASP.NET MVC Attributes
 ==============
 
-Useful attributes for ASP.NET MVC
+Detailed description and how-to-use notes can be found inside each attribute folder.
